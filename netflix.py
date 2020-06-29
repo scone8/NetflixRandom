@@ -17,7 +17,6 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 chromeOptions.add_argument("--disable-infobars")
 '''prefs = {'profile.managed_default_content_settings.images':2}
 chromeOptions.add_experimental_option("prefs", prefs)'''
-driver = webdriver.Chrome(ROOT_DIR + "/chromedriver")
 driver = webdriver.Chrome(options=chromeOptions)
 
 url='https://www.finder.com/ie/netflix-movies'
@@ -28,7 +27,7 @@ listOfMovies = listOfMovies[1].drop(['Year of release', 'Runtime (mins)'], 1)
 def turnMovieOn(randomMovie):
     movieName = randomMovie.Title.to_string(index=False)
     movieName = movieName.lstrip(' ')
-    myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, '.searchTab')))
+    #myElem = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.ID, '.searchTab')))
     driver.find_element_by_css_selector(".searchTab").click()
     search_input = driver.find_element_by_xpath('//input[@data-uia="search-box-input"]')
     search_input.send_keys(movieName)
